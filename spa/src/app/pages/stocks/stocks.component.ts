@@ -21,6 +21,9 @@ export class StocksComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.loadStocks();
+    setInterval(() => {
+      this.loadStocks();
+    }, 10000);
   }
 
   loadStocks() {
