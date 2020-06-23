@@ -23,33 +23,15 @@ export class StocksComponent implements OnInit {
     this.loadStocks();
     setInterval(() => {
       this.loadStocks();
-    }, 10000);
+    }, 1000);
   }
 
   loadStocks() {
     this.apiService.get('pricings').subscribe((data: any) => {
       this.stocks = data;
-      for (let i in this.stocks) {
-        var x = {
-          symbol: this.stocks[i].symbol,
-          price: parseInt(this.stocks[i].price),
-          difference: parseInt(this.stocks[i].difference),
-        };
-        this.elements.push(x);
-      }
-      this.mdbTable.setDataSource(this.elements);
     });
   }
   returZero() {
     return 0;
-  }
-
-  searchItems() {
-    if (!this.searchText) {
-      this.elements = this.mdbTable.getDataSource();
-    }
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-    }
   }
 }

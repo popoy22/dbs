@@ -1,19 +1,5 @@
-<div class="container" *ngIf="stocks">
-  <div class="row">
-    <div class="col-md-12 mx-auto">
-      <div class="md-form">
-        <input
-          type="text"
-          [(ngModel)]="searchText"
-          class="form-control"
-          id="search"
-          (keyup)="searchItems()"
-          mdbInput
-        />
-        <label for="search">Search</label>
-      </div>
-    </div>
-  </div>
+<div class="container mt-5" *ngIf="stocks">
+  <div class="row"></div>
   <table mdbTable bordered="true">
     <thead>
       <tr>
@@ -30,7 +16,7 @@
     </thead>
     <tbody>
       <tr
-        *ngFor="let el of elements | keyvalue; let i = index"
+        *ngFor="let el of stocks | keyvalue; let i = index"
         [routerLink]="['/detail/' + el.value.symbol]"
       >
         <td>{{ el.value.symbol }}</td>
