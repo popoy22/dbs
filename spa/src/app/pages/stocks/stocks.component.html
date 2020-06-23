@@ -1,6 +1,9 @@
-<div class="container mt-5" *ngIf="stocks">
-  <div class="row"></div>
-  <table mdbTable bordered="true">
+<div class="container mt-5">
+  <div class="spinner-border" role="status" *ngIf="!stocks">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <table mdbTable bordered="true" *ngIf="stocks">
     <thead>
       <tr>
         <th [mdbTableSort]="elements" sortBy="symbol">
