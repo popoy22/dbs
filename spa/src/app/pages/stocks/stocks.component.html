@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      <div class="md-form">
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          class="form-control"
+          id="search"
+          (keyup)="searchItems()"
+          mdbInput
+        />
+        <label for="search">Search</label>
+      </div>
+    </div>
+  </div>
+  <table mdbTable bordered="true">
+    <thead>
+      <tr>
+        <th [mdbTableSort]="elements" sortBy="symbol">
+          <i class="fas fa-sort"></i> Symbol
+        </th>
+        <th [mdbTableSort]="elements" sortBy="price">
+          <i class="fas fa-sort"></i> Price
+        </th>
+        <th [mdbTableSort]="elements">
+          Trend
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let el of elements | keyvalue; let i = index"
+        [routerLink]="['/detail/' + el.value.symbol]"
+      >
+        <td>{{ el.value.symbol }}</td>
+        <td>{{ el.value.price | currency }}</td>
+        <td>
+          <mdb-icon
+            class="text-success"
+            fas
+            icon="angle-double-up"
+            *ngIf="el.value.difference > 0"
+          ></mdb-icon>
+
+          <mdb-icon
+            class="text-danger"
+            fas
+            icon="angle-double-down"
+            *ngIf="el.value.difference < 0"
+          ></mdb-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,66 @@
+<ul class="nav justify-content-center grey lighten-4 py-4">
+  <li class="nav-item">
+    <a
+      class="nav-link {{ segment == 'data' ? 'active' : '' }}"
+      (click)="segment = 'data'"
+      href="javascript: void(0);"
+      >Data</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link {{ segment == 'chart' ? 'active' : '' }}"
+      (click)="segment = 'chart'"
+      href="javascript: void(0);"
+      >Chart</a
+    >
+  </li>
+</ul>
+
+<div class="container mt-5" *ngIf="pricings">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{ symbol }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" *ngIf="segment == 'data'">
+      <table mdbTable bordered="true">
+        <thead>
+          <tr>
+            <th>Bid Price</th>
+            <th>Ask Price</th>
+            <th>Market Price</th>
+            <th>Event Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pricings | keyvalue">
+            <td>{{ p.value.bid_price | currency }}</td>
+            <td>{{ p.value.ask_price | currency }}</td>
+            <td>
+              {{ (p.value.bid_price + p.value.ask_price) / 2 | currency }}
+            </td>
+            <td>{{ p.value.event_time | date: "medium" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-12" *ngIf="segment == 'chart'">
+      <div style="display: block;">
+        <canvas
+          mdbChart
+          [chartType]="chartType"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [colors]="chartColors"
+          [options]="chartOptions"
+          [legend]="true"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+        >
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
