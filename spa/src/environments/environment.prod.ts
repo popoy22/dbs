@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost/dbs/api/',
+  apiUrl: 'http://basic4w.com/dbs/api/',
 };

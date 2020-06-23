@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="stocks">
   <div class="row">
     <div class="col-md-12 mx-auto">
       <div class="md-form">
@@ -23,7 +23,7 @@
         <th [mdbTableSort]="elements" sortBy="price">
           <i class="fas fa-sort"></i> Price
         </th>
-        <th [mdbTableSort]="elements">
+        <th>
           Trend
         </th>
       </tr>
@@ -40,11 +40,15 @@
             class="text-success"
             fas
             icon="angle-double-up"
+            mdbTooltip="+ {{ el.value.difference | currency }}"
+            placement="top"
             *ngIf="el.value.difference > 0"
           ></mdb-icon>
 
           <mdb-icon
             class="text-danger"
+            mdbTooltip="{{ el.value.difference | currency }}"
+            placement="top"
             fas
             icon="angle-double-down"
             *ngIf="el.value.difference < 0"
